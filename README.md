@@ -63,6 +63,13 @@ Easy Graphics Engine - EGE图形库主站 | xege.org | 协助管理
 平衍之域 | x-y.studio | 服务器、域名支持
 
 ### 已结束
-| 站点名 | 地址 | 说明 | 结束事由 |
-|----|----|---|---|
-| BluePlum | blueplum.studio | 域名支持 | 域名已转卖给blueplum.studio |
+站点名 | 地址 | 说明 | 结束事由
+----|----|---|---
+BluePlum | blueplum.studio | 域名支持 | 域名已转卖给blueplum.studio
+
+<script src="http://www.snang.cc/lib/js/smd4.js"></script>
+<script>
+//github的page使用的md居然不支持表格？？？
+  var smd = new SMD4();
+  document.getElementById("smd").innerHTML=smd.run(document.getElementById("smd4").value);
+</script>
