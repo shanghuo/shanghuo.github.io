@@ -75,7 +75,7 @@ BluePlum | blueplum.studio | 域名支持 | 域名已转卖给blueplum.studio
   for(var i in p){ 
   console.log(p[i].innerHTML);
     if(p[i].innerHTML){  
-      p[i].innerHTML=smd.run(p[i].innerHTML);  
+      p[i].innerHTML=smd.run("\n"+p[i].innerHTML);  
     }  
   }  
 </script>
