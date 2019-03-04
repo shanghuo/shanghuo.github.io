@@ -71,11 +71,10 @@ BluePlum | blueplum.studio | 域名支持 | 域名已转卖给blueplum.studio
 <script>  
   //由于github的page中md，居然不支持表格！所以插入这段代码来兼容  
   var smd = new SMD4();  
-  var pArray = document.getElementById("main_content").getElementsByTagName("p");  
-  for(var p in pArray){  
-  console.log(p);
-    if(p.innerHTML){  
-      p.innerHTML=smd.run(p.innerHTML);  
+  var p = document.getElementById("main_content").getElementsByTagName("p");  
+  for(var i in p){ 
+    if(p[i].innerHTML){  
+      p[i].innerHTML=smd.run(p[i].innerHTML);  
     }  
   }  
 </script>
