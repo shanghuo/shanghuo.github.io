@@ -63,6 +63,6 @@ Easy Graphics Engine - EGE图形库主站 | xege.org | 协助管理
 平衍之域 | x-y.studio | 服务器、域名支持
 
 ### 已结束
-站点名 | 地址 | 说明 | 结束事由
-----|----|---|---
-BluePlum | blueplum.studio | 域名支持 | 域名已转卖给blueplum.studio
+| 站点名 | 地址 | 说明 | 结束事由 |
+|----|----|---|---|
+| BluePlum | blueplum.studio | 域名支持 | 域名已转卖给blueplum.studio |
