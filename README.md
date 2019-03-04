@@ -40,7 +40,7 @@ permalink: /about.html
 上火的个人站 | www.zhoushangyu.com | 上火位于github的简单网站
 
 ### 已暂停
-站点名 | 原地址 | 暂停事由
+站点名 | ==原地址== | 暂停事由
 ----|----|----
 山岚学堂 | school.snang.cc | 变更为`c4droid.com`
 SNANG骑行徒步 | ride.snang.cc | 将于未来变更为`snanq.com`
@@ -71,7 +71,11 @@ BluePlum | blueplum.studio | 域名支持 | 域名已转卖给blueplum.studio
 <script>  
   //由于github的page中md，居然不支持表格！所以插入这段代码来兼容  
   var smd = new SMD4();  
-  var p = document.getElementById("main_content");  
-  p.innerHTML=smd.run(p.innerHTML); 
+  var p = document.getElementById("main_content").getElementsByTagName("p");  
+  for(var i in p){ 
+    if(p[i].innerHTML){  
+      p[i].innerHTML=smd.run(p[i].innerHTML);  
   console.log(smd.tree);
+    }  
+  }  
 </script>
