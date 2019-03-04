@@ -66,16 +66,16 @@ Easy Graphics Engine - EGE图形库主站 | xege.org | 协助管理
 站点名 | 地址 | 说明 | 结束事由
 ----|----|---|---
 BluePlum | blueplum.studio | 域名支持 | 域名已转卖给blueplum.studio
+轩宇盎然 | buggest.win | 服务器、域名支持 | studio变更与整合，域名用途调动
 
 <script src="http://www.snang.cc/lib/js/smd4.js"></script>  
 <script>  
-  //由于github的page中md，居然不支持表格！所以插入这段代码来兼容  
+  /* 由于github的page中md，居然不支持表格！所以插入这段代码来兼容 */  
   var smd = new SMD4();  
   var p = document.getElementById("main_content").getElementsByTagName("p");  
-  for(var i in p){ 
+  for(var i in p){  
     if(p[i].innerHTML){  
       p[i].innerHTML=smd.run(p[i].innerHTML);  
-  console.log(smd.tree);
     }  
   }  
 </script>
