@@ -49,7 +49,7 @@ c4droid资料网 | www.c4droid.com | 服务器变更
 漏洞报告平台 | buggest.win | 合并到`www.snang.cc`子目录
 
 ### 敬请期待
-站点名 | 拟定地址
+站点名|拟定地址
 ----|----
 山栖涧 | www.snanq.com
 开源山岚 | (待定)
