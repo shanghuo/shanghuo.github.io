@@ -35,13 +35,13 @@ permalink: /about.html
 
 ### 运行中
 站点名 | 地址 | 说明
-----|----|--- 
+:----:|:----:|:--- 
 山岚幽阳 | www.snang.cc | 上火的学习交流平台
 上火的个人站 | www.zhoushangyu.com | 上火位于github的简单网站
 
 ### 已暂停
 站点名 | 原地址 | 暂停事由
-----|----|----
+:----:|:----:|:----
 山岚学堂 | school.snang.cc | 变更为`c4droid.com`
 SNANG骑行徒步 | ride.snang.cc | 将于未来变更为`snanq.com`
 c4droid资料网 | www.c4droid.com | 服务器变更
@@ -50,7 +50,7 @@ c4droid资料网 | www.c4droid.com | 服务器变更
 
 ### 敬请期待
 站点名|拟定地址
-----|----
+:----:|:----:
 山栖涧 | www.snanq.com
 开源山岚 | (待定)
 
@@ -58,13 +58,13 @@ c4droid资料网 | www.c4droid.com | 服务器变更
 
 ### 进行中
 站点名 | 地址 | 说明
-----|----|---
+:----:|:----:|:---
 Easy Graphics Engine - EGE图形库主站 | xege.org | 协助管理
 平衍之域 | x-y.studio | 服务器、域名支持
 
 ### 已结束
 站点名 | 地址 | 说明 | 结束事由
-----|----|---|---
+:----:|:----:|:----|:---
 BluePlum | blueplum.studio | 域名支持 | 域名已转卖给blueplum.studio
 轩宇盎然 | buggest.win | 服务器、域名支持 | studio变更与整合，域名用途调动
 
