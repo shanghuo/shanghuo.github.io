@@ -40,7 +40,7 @@ permalink: /about.html
 上火的个人站 | www.zhoushangyu.com | 上火位于github的简单网站
 
 ### 已暂停
-站点名 | ==原地址== | 暂停事由
+站点名 | 原地址 | 暂停事由
 ----|----|----
 山岚学堂 | school.snang.cc | 变更为`c4droid.com`
 SNANG骑行徒步 | ride.snang.cc | 将于未来变更为`snanq.com`
@@ -73,9 +73,9 @@ BluePlum | blueplum.studio | 域名支持 | 域名已转卖给blueplum.studio
   var smd = new SMD4();  
   var p = document.getElementById("main_content").getElementsByTagName("p");  
   for(var i in p){ 
-  console.log(p[i].innerHTML);
-    if(p[i].innerHTML){  
-      p[i].innerHTML=smd.run("\n"+p[i].innerHTML);  
+  console.log(p[i].innerText);
+    if(p[i].innerText){  
+      p[i].innerHTML=smd.run("\n"+p[i].innerText);  
     }  
   }  
 </script>
