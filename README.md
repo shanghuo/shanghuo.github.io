@@ -67,12 +67,14 @@ Easy Graphics Engine - EGE图形库主站 | xege.org | 协助管理
 ----|----|---|---
 BluePlum | blueplum.studio | 域名支持 | 域名已转卖给blueplum.studio
 
-<script src="http://www.snang.cc/lib/js/smd4.js"></script>
-<script>
-  //由于github的page中md，居然不支持表格！所以插入这段代码来兼容
-  var smd = new SMD4();
-  var pArray = document.getElementsByTagName("p");
-  for(var p in pArray){
-    p.innerHTML=smd.run(p.innerHTML);
-  }
+<script src="http://www.snang.cc/lib/js/smd4.js"></script>  
+<script>  
+  //由于github的page中md，居然不支持表格！所以插入这段代码来兼容  
+  var smd = new SMD4();  
+  var pArray = document.getElementById("main_content").getElementsByTagName("p");  
+  for(var p in pArray){  
+    if(p.innerHTML){  
+      p.innerHTML=smd.run(p.innerHTML);  
+    }  
+  }  
 </script>
