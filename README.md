@@ -40,7 +40,7 @@ permalink: /about.html
 上火的个人站 | www.zhoushangyu.com | 上火位于github的简单网站
 
 ### 已暂停
-站点名 | 原地址 | 暂停事由
+站点名 | ==原地址== | 暂停事由
 ----|----|----
 山岚学堂 | school.snang.cc | 变更为`c4droid.com`
 SNANG骑行徒步 | ride.snang.cc | 将于未来变更为`snanq.com`
