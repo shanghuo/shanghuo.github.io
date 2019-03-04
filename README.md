@@ -1,3 +1,6 @@
+---
+permalink: /about.html
+---
 # 关于本站
 
 这只是上火位于github的简单网站： www.zhoushangyu.com
