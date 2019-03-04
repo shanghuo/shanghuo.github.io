@@ -73,8 +73,8 @@ BluePlum | blueplum.studio | 域名支持 | 域名已转卖给blueplum.studio
   var smd = new SMD4();  
   var pArray = document.getElementById("main_content").getElementsByTagName("p");  
   for(var p in pArray){  
-    if(p.innerHTML){  
   console.log(p.innerHTML);
+    if(p.innerHTML){  
       p.innerHTML=smd.run(p.innerHTML);  
     }  
   }  
