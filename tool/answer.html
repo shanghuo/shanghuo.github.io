@@ -351,6 +351,9 @@
                     div.innerHTML = info[i][0].text;
                     clickLib(div, i);
                 }
+                if (i == libNum) {
+                    div.style.backgroundColor = 'rgb(0, 136, 255)';
+                }
                 libName.appendChild(div);
             }
             if (info.length < 4) {
