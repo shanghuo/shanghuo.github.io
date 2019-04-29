@@ -19,7 +19,7 @@
 
         #last {
             position: fixed;
-            top: 0;
+            top: calc(75% - 15px);
             left: 0;
             width: 40%;
             height: 30px;
@@ -30,7 +30,7 @@
 
         #next {
             position: fixed;
-            top: 0;
+            top: calc(75% - 15px);
             right: 0;
             width: 40%;
             height: 30px;
@@ -41,7 +41,7 @@
 
         #help {
             position: fixed;
-            top: 0;
+            top: calc(75% - 15px);
             left: 45%;
             right: 45%;
             width: 10%;
@@ -53,11 +53,11 @@
 
         #topic {
             position: fixed;
-            top: 30px;
+            top: 0;
             left: 0;
             right: 0;
             width: 100%;
-            height: calc(30% - 30px);
+            height: 40%;
             overflow: auto;
         }
 
@@ -66,11 +66,11 @@
         #selectDiv {
             display: none;
             position: fixed;
-            top: calc(30%);
+            top: 40%;
             left: 0;
             right: 0;
             width: 100%;
-            height: calc(30%);
+            height: 30%;
             overflow: auto;
             line-height: 28px;
             font-size: 16px;
@@ -82,7 +82,7 @@
             right: 0;
             bottom: 50px;
             width: 100%;
-            max-height: calc(40% - 50px);
+            max-height: calc(20% - 50px);
             overflow: auto;
         }
 
@@ -143,6 +143,17 @@
             width: calc(100% - 6px);
             height: calc(100% - 20px);
         }
+
+        #alert {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+        }
     </style>
 </head>
 
@@ -192,6 +203,7 @@
     <div id='result'></div>
     <div id='libName'></div>
     <input type="file" id="file" style="display:none">
+    <div id="alert"></div>
     <footer>COPYRIGHT &copy; 2019<span id='copyYear'></span> shanghuo. ALL RIGHTS RESERVED. </footer>
     <script>
         var copyYear = document.getElementById('copyYear');
@@ -228,9 +240,44 @@
         var last = document.getElementById('last');
         var result = document.getElementById('result');
         var libName = document.getElementById('libName');
+        var alertDiv = document.getElementById('alert');
         var libNum = 0;
         var info = [];
         var num = 1;
+        function alert(str) {
+            var div = document.createElement('div');
+            div.style.position = 'fixed';
+            div.style.top = '0';
+            div.style.left = '0';
+            div.style.right = '0';
+            div.style.bottom = '0';
+            div.style.margin = 'auto';
+            div.style.padding = '15px'
+            div.style.width = '60%';
+            div.style.height = '40%';
+            div.style.backgroundColor = 'rgb(224, 224, 224)';
+            div.style.overflow = 'auto';
+            div.innerHTML = str;
+            alertDiv.appendChild(div);
+            var button = document.createElement('button');
+            button.style.position = 'fixed';
+            button.style.top = '70%';
+            button.style.left = '0';
+            button.style.right = '0';
+            button.style.margin = 'auto';
+            button.style.width = '60%';
+            button.style.height = '30px';
+            button.style.backgroundColor = 'rgb(95, 213, 112)';
+            button.style.border = '0';
+            button.style.cursor = 'pointer';
+            button.innerHTML = '确定';
+            button.onclick = function () {
+                alertDiv.innerHTML = '';
+                alertDiv.style.display = 'none';
+            }
+            alertDiv.appendChild(button);
+            alertDiv.style.display = 'block';
+        }
         next.onclick = function () {
             verification();
             //显示下一题题目
@@ -259,7 +306,7 @@
                 else alert('本题是：错误的');
             }
             else if (info[libNum][num].type == 'answer') {
-                alert('答案是：' + info[libNum][num].answer);
+                alert('答案是：<hr />' + info[libNum][num].answer);
             }
         }
         file.onchange = function () {
@@ -530,6 +577,7 @@
             info = JSON.parse(localStorage.getItem('tool_answer'));
         }
         render();
+        if (info.length > 0) display();
         /*
          * 由于某些人一直在吵吵嚷嚷，所以这是一个非常暴力的实现，这不是最优解决方案，代码乱得一团糟。
          * 接着嚷吧，爱咋咋地，工具就丢在这，爱用不用，呵呵。
