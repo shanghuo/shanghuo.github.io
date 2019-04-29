@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>练题秘方</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            color: rgb(60, 60, 60);
+        }
+
+        input,
+        label {
+            cursor: pointer;
+        }
+
+        #last {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 40%;
+            height: 30px;
+            background-color: rgb(255, 215, 29);
+            border-radius: 8px;
+            border: 0;
+        }
+
+        #next {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 40%;
+            height: 30px;
+            background-color: rgb(0, 136, 255);
+            border-radius: 8px;
+            border: 0;
+        }
+
+        #help {
+            position: fixed;
+            top: 0;
+            left: 45%;
+            right: 45%;
+            width: 10%;
+            height: 30px;
+            background-color: rgb(255, 179, 0);
+            border-radius: 8px;
+            border: 0;
+        }
+
+        #topic {
+            position: fixed;
+            top: 30px;
+            left: 0;
+            right: 0;
+            width: 100%;
+            height: calc(30% - 30px);
+            overflow: auto;
+        }
+
+        #judgeDiv,
+        #answerDiv,
+        #selectDiv {
+            display: none;
+            position: fixed;
+            top: calc(30%);
+            left: 0;
+            right: 0;
+            width: 100%;
+            height: calc(30%);
+            overflow: auto;
+            line-height: 28px;
+            font-size: 16px;
+        }
+
+        #result {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 50px;
+            width: 100%;
+            max-height: calc(40% - 50px);
+            overflow: auto;
+        }
+
+        #libName {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 18px;
+            width: 100%;
+            height: 30px;
+            line-height: 30px;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        footer {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 16px;
+            line-height: 16px;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        #judgeY {
+            margin: 4px 2%;
+            width: 96%;
+            height: 30px;
+            background-color: rgb(95, 213, 112);
+            border-radius: 8px;
+            border: 0;
+        }
+
+        #judgeN {
+            margin: 4px 2%;
+            width: 96%;
+            height: 30px;
+            background-color: rgb(248, 71, 66);
+            border-radius: 8px;
+            border: 0;
+        }
+
+        #judgeScreen {
+            position: relative;
+            top: 0;
+            left: 5px;
+            margin: 0 2%;
+            height: 30px;
+            background-color: rgb(0, 136, 255);
+            border-radius: 8px;
+            border: 0;
+        }
+
+        #answer {
+            width: calc(100% - 6px);
+            height: calc(100% - 20px);
+        }
+    </style>
+</head>
+
+<body>
+    <input type='button' id='last' value='上一题' />
+    <input type='button' id='help' value='提示' />
+    <input type='button' id='next' value='下一题' />
+    <div id='topic'>
+        请先点击右下角导入题库，然后开始使用
+        <hr />
+        这是一个单页面文件，不需要加载其他的任何网络资源，您只要导入经过格式的本地题库，即可开始使用。<br />
+        需要格式化题库请联系“上火”，github：github.com/shanghuo。<br />
+    </div><br />
+    <div id='judgeDiv'>
+        <input type='button' id='judgeY'
+            onclick='judgeScreen.title="true";judgeScreen.innerHTML="√";judgeScreen.style.top="-68px";' value='对' />
+        <input type='button' id='judgeN'
+            onclick='judgeScreen.title="false";judgeScreen.innerHTML="×";judgeScreen.style.top="-30px";' value='错' />
+        <span id='judgeScreen' title="null"></span>
+    </div>
+    <div id='answerDiv'>
+        <textarea id='answer'></textarea>
+    </div>
+    <div id='selectDiv'>
+        <span id='selectAprompt'>A:</span>
+        <input type='checkbox' id='selectA'
+            onchange='if(info[libNum][num].answer.length==1){selectB.checked=false;selectC.checked=false;selectD.checked=false;selectE.checked=false;}' />
+        <label for='selectA' id='selectAstr'></label><br />
+        <span id='selectBprompt'>B:</span>
+        <input type='checkbox' id='selectB'
+            onchange='if(info[libNum][num].answer.length==1){selectA.checked=false;selectC.checked=false;selectD.checked=false;selectE.checked=false;}' />
+        <label for='selectB' id='selectBstr'></label><br />
+        <span id='selectCprompt'>C:</span>
+        <input type='checkbox' id='selectC'
+            onchange='if(info[libNum][num].answer.length==1){selectA.checked=false;selectB.checked=false;selectD.checked=false;selectE.checked=false;}' />
+        <label for='selectC' id='selectCstr'></label><br />
+        <span id='selectDprompt'>D:</span>
+        <input type='checkbox' id='selectD'
+            onchange='if(info[libNum][num].answer.length==1){selectA.checked=false;selectB.checked=false;selectC.checked=false;selectE.checked=false;}' />
+        <label for='selectD' id='selectDstr'></label><br />
+        <span id='selectEprompt'>E:</span>
+        <input type='checkbox' id='selectE'
+            onchange='if(info[libNum][num].answer.length==1){selectA.checked=false;selectB.checked=false;selectC.checked=false;selectD.checked=false;}' />
+        <label for='selectE' id='selectEstr'></label><br />
+    </div>
+    <div id='result'></div>
+    <div id='libName'></div>
+    <input type="file" id="file" style="display:none">
+    <footer>COPYRIGHT &copy; 2019<span id='copyYear'></span> shanghuo. ALL RIGHTS RESERVED. </footer>
+    <script>
+        var copyYear = document.getElementById('copyYear');
+        var date = new Date();
+        if (date.getFullYear() > 2019) {
+            copyYear.innerHTML = ' - ' + date.getFullYear();
+        }
+
+        var file = document.getElementById('file');
+        var topic = document.getElementById('topic');
+        var judgeDiv = document.getElementById('judgeDiv');
+        var judgeY = document.getElementById('judgeY');
+        var judgeN = document.getElementById('judgeN');
+        var judgeScreen = document.getElementById('judgeScreen');
+        var selectDiv = document.getElementById('selectDiv');
+        var selectAprompt = document.getElementById('selectAprompt');
+        var selectBprompt = document.getElementById('selectBprompt');
+        var selectCprompt = document.getElementById('selectCprompt');
+        var selectDprompt = document.getElementById('selectDprompt');
+        var selectEprompt = document.getElementById('selectEprompt');
+        var selectA = document.getElementById('selectA');
+        var selectB = document.getElementById('selectB');
+        var selectC = document.getElementById('selectC');
+        var selectD = document.getElementById('selectD');
+        var selectE = document.getElementById('selectE');
+        var selectAstr = document.getElementById('selectAstr');
+        var selectBstr = document.getElementById('selectBstr');
+        var selectCstr = document.getElementById('selectCstr');
+        var selectDstr = document.getElementById('selectDstr');
+        var selectEstr = document.getElementById('selectEstr');
+        var answer = document.getElementById('answer');
+        var answerDiv = document.getElementById('answerDiv');
+        var next = document.getElementById('next');
+        var last = document.getElementById('last');
+        var result = document.getElementById('result');
+        var libName = document.getElementById('libName');
+        var libNum = 0;
+        var info = [];
+        var num = 1;
+        next.onclick = function () {
+            verification();
+            //显示下一题题目
+            if (num < info[libNum].length - 1) {
+                num++;
+                display();
+            }
+            else alert('您已完成练习');
+            render();
+        }
+        last.onclick = function () {
+            verification();
+            if (num > 1) num--;
+            display();
+            render();
+        }
+        help.onclick = function () {
+            if (info[libNum][num].type == 'select') {
+                alert('答案是：' + info[libNum][num].answer.toLocaleUpperCase());
+            }
+            else if (info[libNum][num].type == 'judge') {
+                var val = info[libNum][num].answer.toLocaleUpperCase();
+                if (val == 'T' || val == 'TRUE' || val == 'Y') val = true;
+                else val = false;
+                if (val) alert('本题是：正确的');
+                else alert('本题是：错误的');
+            }
+            else if (info[libNum][num].type == 'answer') {
+                alert('答案是：' + info[libNum][num].answer);
+            }
+        }
+        file.onchange = function () {
+            var fileRead = new FileReader();
+            fileRead.readAsText(file.files[0], "UTF-8");
+            fileRead.onload = function (event) {
+                info.push(JSON.parse(event.target.result));
+                libNum = info.length - 1;
+                render();
+                num = 1;
+                display();
+            }
+        }
+
+        function render() {
+            result.innerHTML = '';
+            libName.innerHTML = '';
+            for (var i = 0; i < info.length; i++) {
+                var div = document.createElement('div');
+                div.style.cursor = 'pointer';
+                div.style.margin = '2px';
+                if (info.length < 5) {
+                    div.style.width = 'calc(' + (1 / info.length) * 90 + '% - 4px)';
+                }
+                else {
+                    div.style.width = 'calc(' + (1 / info.length) * 100 + '% - 4px)';
+                }
+                div.style.height = '30px';
+                div.style.float = 'left';
+                div.style.backgroundColor = 'rgb(224, 224, 224)';
+                if (info[i][0].type == 'common' && info[i].length > 1) {
+                    div.innerHTML = info[i][0].text;
+                    clickLib(div, i);
+                }
+                libName.appendChild(div);
+            }
+            if (info.length < 5) {
+                var div = document.createElement('div');
+                div.style.cursor = 'pointer';
+                div.style.margin = '2px';
+                div.style.width = 'calc(10% - 4px)';
+                div.style.height = '30px';
+                div.style.float = 'right';
+                div.style.backgroundColor = 'rgb(224, 224, 224)';
+                div.innerHTML = '导入';
+                div.onclick = function () {
+                    file.click();
+                }
+                libName.appendChild(div);
+            }
+            if (info.length > 0) {
+                for (var i = 1; i < info[libNum].length; i++) {
+                    var div = document.createElement('div');
+                    div.style.cursor = 'pointer';
+                    div.style.width = '30px';
+                    div.style.height = '30px';
+                    div.style.float = 'left';
+                    div.innerHTML = i;
+                    if (info[libNum][i].result === true) {
+                        div.style.backgroundColor = 'rgb(95, 213, 112)';
+                    }
+                    else if (info[libNum][i].result === false) {
+                        div.style.backgroundColor = 'rgb(248, 71, 66)';
+                    }
+                    else {
+                        div.style.backgroundColor = 'rgb(224, 224, 224)';
+                    }
+                    clickResult(div, i);
+                    result.appendChild(div);
+                }
+            }
+        }
+        function clickResult(div, i) {
+            div.onclick = function () {
+                num = i;
+                display();
+            }
+        }
+        function clickLib(div, i) {
+            div.onclick = function () {
+                libNum = i;
+                render();
+                num = 1;
+                display();
+            }
+        }
+        function verification() {
+            //判断答案是否正确
+            var isResultTrue = true;
+            if (info[libNum][num].type == 'select') {
+                var arr = info[libNum][num].answer.toLocaleUpperCase().split('');
+                try {
+                    if (arr.indexOf('A') != -1 && !selectA.checked) {
+                        throw 'A is true';
+                    }
+                    if (arr.indexOf('B') != -1 && !selectB.checked) {
+                        throw 'B is true';
+                    }
+                    if (arr.indexOf('C') != -1 && !selectC.checked) {
+                        throw 'C is true';
+                    }
+                    if (arr.indexOf('D') != -1 && !selectD.checked) {
+                        throw 'D is true';
+                    }
+                    if (arr.indexOf('E') != -1 && !selectE.checked) {
+                        throw 'E is true';
+                    }
+                    if (arr.indexOf('A') == -1 && selectA.checked) {
+                        throw 'A is false';
+                    }
+                    if (arr.indexOf('B') == -1 && selectB.checked) {
+                        throw 'B is false';
+                    }
+                    if (arr.indexOf('C') == -1 && selectC.checked) {
+                        throw 'C is false';
+                    }
+                    if (arr.indexOf('D') == -1 && selectD.checked) {
+                        throw 'D is false';
+                    }
+                    if (arr.indexOf('E') == -1 && selectE.checked) {
+                        throw 'E is false';
+                    }
+                }
+                catch (err) {
+                    isResultTrue = false;
+                    alert('答案是：' + info[libNum][num].answer.toLocaleUpperCase());
+                }
+            }
+            else if (info[libNum][num].type == 'judge') {
+                var val = info[libNum][num].answer.toLocaleUpperCase();
+                if (val == 'T' || val == 'TRUE' || val == 'Y') val = true;
+                else val = false;
+                try {
+                    if (val && judgeScreen.title != 'true') {
+                        throw 'is true';
+                    }
+                    if (!val && judgeScreen.title != 'false') {
+                        throw 'is false';
+                    }
+                }
+                catch (err) {
+                    isResultTrue = false;
+                    if (val) alert('你答错了，题目是：正确的');
+                    else alert('你答错了，题目是：错误的');
+                }
+            }
+            else if (info[libNum][num].type == 'answer') {
+                try {
+                    if (info[libNum][num].answer != answer.value) {
+                        throw 'err';
+                    }
+                }
+                catch (err) {
+                    isResultTrue = null;
+                    alert('请自行检查，标准答案是：' + info[libNum][num].answer);
+                }
+            }
+            if (isResultTrue === true) {
+                info[libNum][num].result = true;
+            }
+            else if (isResultTrue === false) {
+                info[libNum][num].result = false;
+            }
+        }
+        function display() {
+            selectA.checked = false;
+            selectB.checked = false;
+            selectC.checked = false;
+            selectD.checked = false;
+            selectE.checked = false;
+            answer.value = '';
+            judgeScreen.innerHTML = '';
+            //显示题目
+            if (info[libNum][num].type == 'select') {
+                if (info[libNum][num].answer.length == 1) {
+                    topic.innerHTML = '(单选) ' + num + ':<br />' + info[libNum][num].text;
+                }
+                else {
+                    topic.innerHTML = '(多选) ' + num + ':<br />' + info[libNum][num].text;
+                }
+                judgeDiv.style.display = 'none';
+                selectDiv.style.display = 'block';
+                if (info[libNum][num].A) {
+                    selectAprompt.style.display = 'inline';
+                    selectA.style.display = 'inline';
+                    selectAstr.style.display = 'inline';
+                    selectAstr.innerHTML = info[libNum][num].A;
+                }
+                else {
+                    selectAprompt.style.display = 'none';
+                    selectA.style.display = 'none';
+                    selectAstr.style.display = 'none';
+                }
+                if (info[libNum][num].B) {
+                    selectBprompt.style.display = 'inline';
+                    selectB.style.display = 'inline';
+                    selectBstr.style.display = 'inline';
+                    selectBstr.innerHTML = info[libNum][num].B;
+                }
+                else {
+                    selectBprompt.style.display = 'none';
+                    selectB.style.display = 'none';
+                    selectBstr.style.display = 'none';
+                }
+                if (info[libNum][num].C) {
+                    selectCprompt.style.display = 'inline';
+                    selectC.style.display = 'inline';
+                    selectCstr.style.display = 'inline';
+                    selectCstr.innerHTML = info[libNum][num].C;
+                }
+                else {
+                    selectCprompt.style.display = 'none';
+                    selectC.style.display = 'none';
+                    selectCstr.style.display = 'none';
+                }
+                if (info[libNum][num].D) {
+                    selectDprompt.style.display = 'inline';
+                    selectD.style.display = 'inline';
+                    selectDstr.style.display = 'inline';
+                    selectDstr.innerHTML = info[libNum][num].D;
+                }
+                else {
+                    selectDprompt.style.display = 'none';
+                    selectD.style.display = 'none';
+                    selectDstr.style.display = 'none';
+                }
+                if (info[libNum][num].E) {
+                    selectEprompt.style.display = 'inline';
+                    selectE.style.display = 'inline';
+                    selectEstr.style.display = 'inline';
+                    selectEstr.innerHTML = info[libNum][num].E;
+                }
+                else {
+                    selectEprompt.style.display = 'none';
+                    selectE.style.display = 'none';
+                    selectEstr.style.display = 'none';
+                }
+                answerDiv.style.display = 'none';
+            }
+            else if (info[libNum][num].type == 'judge') {
+                topic.innerHTML = '(判断) ' + num + ':<br />' + info[libNum][num].text;
+                judgeDiv.style.display = 'block';
+                judgeY.style.display = 'inline';
+                judgeN.style.display = 'inline';
+                judgeScreen.style.display = 'inline';
+                selectDiv.style.display = 'none';
+                answerDiv.style.display = 'none';
+            }
+            else if (info[libNum][num].type == 'answer') {
+                topic.innerHTML = '(简答) ' + num + ':<br />' + info[libNum][num].text;
+                judgeDiv.style.display = 'none';
+                selectDiv.style.display = 'none';
+                answerDiv.style.display = 'block';
+            }
+        }
+        render();
+        /*
+         * 由于某些人一直在吵吵嚷嚷，所以这是一个非常暴力的实现，这不是最优解决方案，代码乱得一团糟。
+         * 接着嚷吧，爱咋咋地，工具就丢在这，爱用不用，呵呵。
+         *
+         * 上火所有，转载请注明
+         * 于2019年4月29日10点33分记
+         */
+    </script>
+</body>
+
+</html>
