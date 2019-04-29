@@ -154,6 +154,7 @@
         请先点击右下角导入题库，然后开始使用
         <hr />
         这是一个单页面文件，不需要加载其他的任何网络资源，您只要导入经过格式的本地题库，即可开始使用。<br />
+        题库加载后会自动保存在你的本地，在您本地存储满4个题库后，您可以选择清空缓存的题库；请放心，我们不会将您的题库传输至网上<br />
         需要格式化题库请联系“上火”，github：github.com/shanghuo。<br />
     </div><br />
     <div id='judgeDiv'>
@@ -266,6 +267,7 @@
             fileRead.readAsText(file.files[0], "UTF-8");
             fileRead.onload = function (event) {
                 info.push(JSON.parse(event.target.result));
+                localStorage.setItem('tool_answer', JSON.stringify(info));
                 libNum = info.length - 1;
                 render();
                 num = 1;
@@ -280,12 +282,7 @@
                 var div = document.createElement('div');
                 div.style.cursor = 'pointer';
                 div.style.margin = '2px';
-                if (info.length < 5) {
-                    div.style.width = 'calc(' + (1 / info.length) * 90 + '% - 4px)';
-                }
-                else {
-                    div.style.width = 'calc(' + (1 / info.length) * 100 + '% - 4px)';
-                }
+                div.style.width = 'calc(' + (1 / info.length) * 90 + '% - 4px)';
                 div.style.height = '30px';
                 div.style.float = 'left';
                 div.style.backgroundColor = 'rgb(224, 224, 224)';
@@ -295,7 +292,7 @@
                 }
                 libName.appendChild(div);
             }
-            if (info.length < 5) {
+            if (info.length < 4) {
                 var div = document.createElement('div');
                 div.style.cursor = 'pointer';
                 div.style.margin = '2px';
@@ -306,6 +303,21 @@
                 div.innerHTML = '导入';
                 div.onclick = function () {
                     file.click();
+                }
+                libName.appendChild(div);
+            }
+            else {
+                var div = document.createElement('div');
+                div.style.cursor = 'pointer';
+                div.style.margin = '2px';
+                div.style.width = 'calc(10% - 4px)';
+                div.style.height = '30px';
+                div.style.float = 'right';
+                div.style.backgroundColor = 'rgb(224, 224, 224)';
+                div.innerHTML = '清空';
+                div.onclick = function () {
+                    localStorage.removeItem('tool_answer');
+                    location.reload();
                 }
                 libName.appendChild(div);
             }
@@ -513,6 +525,9 @@
                 selectDiv.style.display = 'none';
                 answerDiv.style.display = 'block';
             }
+        }
+        if (localStorage.getItem('tool_answer')) {
+            info = JSON.parse(localStorage.getItem('tool_answer'));
         }
         render();
         /*
