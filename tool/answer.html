@@ -314,7 +314,7 @@
             }
             else if (info[libNum][num].type == 'judge') {
                 var val = info[libNum][num].answer.toLocaleUpperCase();
-                if (val == 'T' || val == 'TRUE' || val == 'Y') val = true;
+                if (val == 'T' || val == 'TRUE' || val == 'Y' || val == '√') val = true;
                 else val = false;
                 if (val) alert('本题是：正确的');
                 else alert('本题是：错误的');
