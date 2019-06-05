@@ -465,7 +465,7 @@
             }
             else if (info[libNum][num].type == 'judge') {
                 var val = info[libNum][num].answer.toLocaleUpperCase();
-                if (val == 'T' || val == 'TRUE' || val == 'Y') val = true;
+                if (val == 'T' || val == 'TRUE' || val == 'Y' || val == '√') val = true;
                 else val = false;
                 try {
                     if (val && judgeScreen.title != 'true') {
